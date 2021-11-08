@@ -1,6 +1,15 @@
+import React, { useEffect } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
+  useEffect(() => {
+    const data = {};
+  }, []);
+
   return (
     <>
+      <ToastContainer />
       <div className="max-w-sm rounded shadow-lg overflow-hidden">
         <img
           src="https://source.unsplash.com/random"
