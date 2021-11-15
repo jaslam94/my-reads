@@ -19,7 +19,7 @@ function SearchBox({ setSearchQuery }) {
             placeholder="Search book by title..."
           />
           <button
-            className="flex-shrink-0 bg-black hover:bg-gray-600 border-gray-700 hover:border-gray-300 text-sm border-4 text-white py-1 px-2 rounded"
+            className="flex-shrink-0 bg-gray-700 hover:bg-gray-900 border-gray-700 hover:border-black text-sm border-4 text-white py-1 px-2 rounded"
             type="submit"
           >
             Search

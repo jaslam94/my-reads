@@ -1,4 +1,5 @@
 import React from "react";
+import CardButtons from "./cardButtons";
 
 function BookCard({ book }) {
   const {
@@ -20,6 +21,7 @@ function BookCard({ book }) {
         key={key}
         className="max-w-sm rounded shadow-lg overflow-hidden py-5"
       >
+        <CardButtons />
         <img src={imgSrc} alt="book-cover" className="mx-auto" />
         <div className="px-6 py-4">
           <div className="font-bold text-purple-500 mb-2 text-lg">{title}</div>
