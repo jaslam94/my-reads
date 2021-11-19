@@ -10,6 +10,6 @@ const {
 router.route("/").get(getBooks);
 router.route("/wanttoread").post(addWantToRead);
 router.route("/read").post(addRead);
-router.route("/").delete(delBook);
+router.route("/:id").delete(delBook);
 
 module.exports = router;
