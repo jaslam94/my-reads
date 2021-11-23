@@ -2,14 +2,13 @@ const express = require("express");
 const router = express.Router();
 const {
   getBooks,
-  addWantToRead,
-  addRead,
+  getReadsByType,
+  addBook,
   delBook,
 } = require("../controllers/books");
 
-router.route("/").get(getBooks);
-router.route("/wanttoread").post(addWantToRead);
-router.route("/read").post(addRead);
-router.route("/:id").delete(delBook);
+router.route("/").post(addBook);
+router.route("/:id").get(getBooks).delete(delBook);
+// router.route("/:type").get(getReadsByType);
 
 module.exports = router;

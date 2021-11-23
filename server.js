@@ -11,7 +11,10 @@ connectDB();
 const auth = require("./routes/auth");
 const books = require("./routes/books");
 const users = require("./routes/users");
+
 const app = express();
+
+app.use(express.json());
 
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/books", books);

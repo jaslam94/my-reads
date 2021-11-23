@@ -22,6 +22,11 @@ const bookSchema = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  type: {
+    type: Number,
+    required: true,
+    default: 1,
+  },
   createdAt: {
     type: Date,
     default: Date.Now,

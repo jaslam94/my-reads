@@ -1,12 +1,112 @@
-exports.getBooks = (req, res, next) => {
-  res.send("Get my books");
+const Book = require("../models/book");
+
+exports.getBooks = async (req, res, next) => {
+  try {
+    const book = await Book.findById(req.params.id);
+
+    if (!book) {
+      return res.status(404).json({
+        success: false,
+        message: "Not found!",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: book,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      error: "Server error!",
+    });
+  }
 };
-exports.addWantToRead = (req, res, next) => {
-  res.send("Add to want to read books");
+
+exports.getReadsByType = async (req, res, next) => {
+  try {
+    const { type } = req.params;
+
+    const books = await Book.find((m) => m.type === type);
+
+    if (!books) {
+      return res.status(404).json({
+        success: false,
+        message: "Not found!",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: books,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: "Server error!",
+    });
+  }
 };
-exports.addRead = (req, res, next) => {
-  res.send("Add to read books");
+
+exports.addBook = async (req, res, next) => {
+  try {
+    const {
+      title,
+      authors,
+      subjects,
+      firstPublished,
+      coverUrl,
+      type,
+      createdAt,
+      user,
+    } = req.body;
+
+    const book = await Book.create(req.body);
+    return res.status(201).json({
+      success: true,
+      data: book,
+    });
+  } catch (err) {
+    if (err.name === "ValidationError") {
+      const messages = Object.values(err.errors).map((m) => m.message);
+
+      return res.status(400).json({
+        success: false,
+        error: messages,
+      });
+    }
+
+    return res.status(500).json({
+      success: false,
+      error: "Server error!",
+    });
+  }
 };
-exports.delBook = (req, res, next) => {
-  res.send("Del book");
+
+exports.delBook = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const book = await Book.findById(id);
+
+    if (!book) {
+      return res.status(404).json({
+        success: false,
+        message: "Not found!",
+      });
+    }
+
+    await book.deleteOne();
+
+    return res.status(200).json({
+      success: true,
+      data: {},
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: "Server error!",
+    });
+  }
 };
