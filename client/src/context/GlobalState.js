@@ -3,8 +3,7 @@ import AppReducer from "./AppReducer";
 import { httpService } from "../services/httpService";
 
 const initialState = {
-  wantToRead: [],
-  read: [],
+  books: [],
   error: "",
   loading: true,
 };
@@ -17,24 +16,67 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   //Actions
-  async function getRead() {
+  async function getBooks(type) {
     try {
-      const response = await httpService.get("/api/v1/getRead");
+      const response = await httpService.get(`/api/v1/books?type=${type}`);
+
       const { data } = response.data;
-      dispatch({ type: "GET_Read", payload: data });
+
+      dispatch({
+        type: "Get_Books",
+        payload: data,
+      });
     } catch (err) {
       const { error } = err.response.data;
-      dispatch({ type: "API_ERROR", payload: error });
+
+      dispatch({
+        type: "API_ERROR",
+        payload: error,
+      });
     }
   }
-  async function getWantToRead() {
+
+  async function addBook(book) {
     try {
-      const response = await httpService.get("/api/v1/getWantToRead");
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const response = await httpService.post("/api/v1/books", book, config);
+
       const { data } = response.data;
-      dispatch({ type: "GET_WantToRead", payload: data });
+
+      dispatch({
+        type: "Add_Book",
+        payload: data,
+      });
     } catch (err) {
       const { error } = err.response.data;
-      dispatch({ type: "API_ERROR", payload: error });
+
+      dispatch({
+        type: "API_ERROR",
+        payload: error,
+      });
+    }
+  }
+
+  async function deleteBook(id) {
+    try {
+      await httpService.delete(`/api/v1/books/${id}`);
+
+      dispatch({
+        type: "Del_Book",
+        payload: id,
+      });
+    } catch (err) {
+      const { error } = err.response.data;
+
+      dispatch({
+        type: "API_ERROR",
+        payload: error,
+      });
     }
   }
 
@@ -45,8 +87,9 @@ export const GlobalProvider = ({ children }) => {
         read: state.read,
         loading: state.loading,
         error: state.error,
-        getWantToRead,
-        getRead,
+        getBooks,
+        addBook,
+        deleteBook,
       }}
     >
       {children}
