@@ -16,6 +16,10 @@ const app = express();
 
 app.use(express.json());
 
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
+
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/books", books);
 app.use("/api/v1/users", users);

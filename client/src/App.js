@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import BookCard from "./components/bookCard";
 import SearchBox from "./components/searchBox";
+import NavBar from "./components/navbar";
 
 function App() {
   const [books, setBooks] = useState([]);
@@ -32,22 +33,27 @@ function App() {
   }
 
   return (
-    <div className="container mx-auto my-20">
-      <ToastContainer />
-      <SearchBox setSearchQuery={(text) => setSearchQuery(text)} />
-      {isLoading === false && books.length === 0 && (
-        <h1 className="text-5xl text-center mx-auto mt-32">No books found..</h1>
-      )}
-      <div className="flex justify-center ">
-        {isLoading === true ? (
-          <h1 className="text-6xl text-center mx-auto mt-32">Loading...</h1>
-        ) : (
-          <div className="grid grid-cols-3 gap-16">
-            {books && books.map((book) => <BookCard book={book} />)}
-          </div>
+    <>
+      <NavBar />
+      <div className="container mx-auto my-20">
+        <ToastContainer />
+        <SearchBox setSearchQuery={(text) => setSearchQuery(text)} />
+        {isLoading === false && books.length === 0 && (
+          <h1 className="text-5xl text-center mx-auto mt-32">
+            No books found..
+          </h1>
         )}
+        <div className="flex justify-center ">
+          {isLoading === true ? (
+            <h1 className="text-6xl text-center mx-auto mt-32">Loading...</h1>
+          ) : (
+            <div className="grid grid-cols-3 gap-16">
+              {books && books.map((book) => <BookCard book={book} />)}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
