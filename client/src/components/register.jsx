@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import authService from "../services/authService";
 
-export default function Login() {
+export default function Register() {
+  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
 
   async function HandleOnSubmit(e) {
@@ -28,7 +30,7 @@ export default function Login() {
             alt="Workflow"
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
+            Sign up for an account
           </h2>
           {error !== "" && (
             <p className="mt-2 text-center text-sm text-red-500">{error}</p>
@@ -41,6 +43,21 @@ export default function Login() {
         >
           <input type="hidden" name="remember" defaultValue="true" />
           <div className="rounded-md shadow-sm -space-y-px">
+            <div>
+              <label htmlFor="full-name" className="sr-only">
+                Full Name
+              </label>
+              <input
+                id="full-name"
+                name="full-name"
+                type="text"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Full Name"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+              />
+            </div>
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Email address
@@ -73,6 +90,22 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+            <div>
+              <label htmlFor="confirmPassword" className="sr-only">
+                Confirm Password
+              </label>
+              <input
+                id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                autoComplete="current-password"
+                required
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                placeholder="Enter password again"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
           </div>
 
           <div>
@@ -86,27 +119,18 @@ export default function Login() {
                   aria-hidden="true"
                 />
               </span>
-              Sign in
+              Sign up
             </button>
           </div>
         </form>
 
-        <div className="flex items-center">
-          <div className="text-sm mr-auto">
-            <a
-              href="/register"
-              className="font-medium text-gray-600 hover:text-gray-500"
-            >
-              Sign up for an account?
-            </a>
-          </div>
-
+        <div className="flex justify-end">
           <div className="text-sm">
             <a
-              href="/forgotpass"
+              href="/login"
               className="font-medium text-indigo-600 hover:text-indigo-500"
             >
-              Forgot your password?
+              Back to Login?
             </a>
           </div>
         </div>

@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Main from "./components/main";
 import Login from "./components/login";
+import Register from "./components/register";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             }
           />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </BrowserRouter>
     </>
