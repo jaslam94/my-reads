@@ -4,6 +4,7 @@ import httpService from "../services/httpService";
 
 import BookCard from "./bookCard";
 import SearchBox from "./searchBox";
+import NavBar from "./navbar";
 
 function Main() {
   const [books, setBooks] = useState([]);
@@ -29,21 +30,26 @@ function Main() {
   }
 
   return (
-    <div>
-      <SearchBox setSearchQuery={(text) => setSearchQuery(text)} />
-      {isLoading === false && books.length === 0 && (
-        <h1 className="text-5xl text-center mx-auto mt-32">No books found..</h1>
-      )}
-      <div className="flex justify-center ">
-        {isLoading === true ? (
-          <h1 className="text-6xl text-center mx-auto mt-32">Loading...</h1>
-        ) : (
-          <div className="grid grid-cols-3 gap-16">
-            {books && books.map((book) => <BookCard book={book} />)}
-          </div>
+    <>
+      <div className="container mx-auto">
+        <NavBar />
+        <SearchBox setSearchQuery={(text) => setSearchQuery(text)} />
+        {isLoading === false && books.length === 0 && (
+          <h1 className="text-5xl text-center mx-auto mt-32">
+            No books found..
+          </h1>
         )}
+        <div className="flex justify-center ">
+          {isLoading === true ? (
+            <h1 className="text-6xl text-center mx-auto mt-32">Loading...</h1>
+          ) : (
+            <div className="grid grid-cols-3 gap-16">
+              {books && books.map((book) => <BookCard book={book} />)}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

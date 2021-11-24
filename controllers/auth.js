@@ -2,7 +2,7 @@ const Joi = require("joi");
 const bcrypt = require("bcrypt");
 const { User } = require("../models/user");
 
-exports.auth = (req, res, next) => {
+exports.auth = async (req, res, next) => {
   const { email, password } = req.body;
 
   const { error } = validate(req.body);

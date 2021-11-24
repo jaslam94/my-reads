@@ -3,11 +3,9 @@ import React, { useState } from "react";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import authService from "../services/authService";
 
-export default function Example() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState("");
-
   const [error, setError] = useState("");
 
   async function HandleOnSubmit(e) {
@@ -77,34 +75,6 @@ export default function Example() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input
-                id="remember-me"
-                name="remember-me"
-                type="checkbox"
-                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                value={rememberMe}
-                onChange={(e) => setRememberMe(e.target.value)}
-              />
-              <label
-                htmlFor="remember-me"
-                className="ml-2 block text-sm text-gray-900"
-              >
-                Remember me
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <a
-                href="#"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
-              >
-                Forgot your password?
-              </a>
-            </div>
-          </div>
-
           <div>
             <button
               type="submit"
@@ -120,6 +90,17 @@ export default function Example() {
             </button>
           </div>
         </form>
+
+        <div className="flex justify-end">
+          <div className="text-sm">
+            <a
+              href="#"
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              Forgot your password?
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );
