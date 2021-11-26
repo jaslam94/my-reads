@@ -2,12 +2,12 @@ import jwtDecode from "jwt-decode";
 import http from "./httpService";
 import { apiUrl } from "../config.json";
 
-const apiEndpoint = apiUrl + "/auth/login";
 const tokenKey = "token";
-http.setJwt(getJwt());
+
+http.setJwt();
 
 export async function login(email, password) {
-  const response = await http.post(apiEndpoint, {
+  const response = await http.post(`${apiUrl}/auth/login`, {
     email,
     password,
   });
@@ -32,15 +32,10 @@ export function getCurrentUser() {
   }
 }
 
-export function getJwt() {
-  return localStorage.getItem(tokenKey);
-}
-
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   login,
   loginWithJwt,
   logout,
   getCurrentUser,
-  getJwt,
 };

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import httpService from "../services/httpService";
+import apiService from "../services/openLibService";
 
 import BookCard from "./bookCard";
 import SearchBox from "./searchBox";
@@ -22,11 +22,9 @@ function Main() {
 
   async function fetchData() {
     setIsLoading(true);
-    const { data } = await httpService.get(
-      `http://openlibrary.org/search.json?title=${searchQuery}&fields=key,title,first_publish_year,author_name,subject,cover_edition_key&limit=6`
-    );
+    const { docs } = await apiService.getBooksByName(searchQuery);
     setIsLoading(false);
-    setBooks(data.docs);
+    setBooks(docs);
   }
 
   return (
@@ -44,7 +42,8 @@ function Main() {
             <h1 className="text-6xl text-center mx-auto mt-32">Loading...</h1>
           ) : (
             <div className="grid grid-cols-3 gap-16">
-              {books && books.map((book) => <BookCard book={book} />)}
+              {books &&
+                books.map((book) => <BookCard key={book.key} book={book} />)}
             </div>
           )}
         </div>

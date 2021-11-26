@@ -2,6 +2,8 @@ import axios from "axios";
 import logger from "./logService";
 import { toast } from "react-toastify";
 
+const tokenKey = "token";
+
 axios.interceptors.response.use(null, (error) => {
   const expectedError =
     error.response &&
@@ -16,8 +18,13 @@ axios.interceptors.response.use(null, (error) => {
   return Promise.reject(error);
 });
 
-function setJwt(jwt) {
-  axios.defaults.headers.common["x-auth-token"] = jwt;
+function setJwt() {
+  const token = localStorage.getItem(tokenKey);
+  axios.defaults.headers.common["x-auth-token"] = token;
+}
+
+function delJwt() {
+  delete axios.defaults.headers.common["x-auth-token"];
 }
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -27,4 +34,5 @@ export default {
   put: axios.put,
   delete: axios.delete,
   setJwt,
+  delJwt,
 };

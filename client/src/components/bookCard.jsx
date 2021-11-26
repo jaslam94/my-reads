@@ -17,10 +17,7 @@ function BookCard({ book }) {
 
   return (
     book && (
-      <div
-        key={key}
-        className="max-w-sm rounded shadow-lg overflow-hidden py-5"
-      >
+      <div className="max-w-sm rounded shadow-lg overflow-hidden py-5">
         <CardButtons />
         <img src={imgSrc} alt="book-cover" className="mx-auto" />
         <div className="px-6 py-4">

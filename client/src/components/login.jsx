@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
 import { LockClosedIcon } from "@heroicons/react/solid";
+
 import authService from "../services/authService";
+import { Navigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -17,6 +19,8 @@ export default function Login() {
       setError("Cannot login. Try again!");
     }
   }
+
+  if (authService.getCurrentUser()) return <Navigate to="/" />;
 
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
