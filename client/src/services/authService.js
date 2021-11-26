@@ -11,8 +11,8 @@ export async function login(email, password) {
     email,
     password,
   });
-  const { access_token: jwt } = response.data;
-  localStorage.setItem(tokenKey, jwt);
+  const { token } = response.data;
+  localStorage.setItem(tokenKey, token);
 }
 
 export async function loginWithJwt(jwt) {
@@ -36,6 +36,7 @@ export function getJwt() {
   return localStorage.getItem(tokenKey);
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   login,
   loginWithJwt,

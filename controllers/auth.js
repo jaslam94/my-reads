@@ -1,11 +1,12 @@
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
-const { User } = require("../models/user");
+const User = require("../models/user");
 
 exports.auth = async (req, res, next) => {
   const { email, password } = req.body;
 
   const { error } = validate(req.body);
+
   if (error)
     return res.status(400).json({
       success: false,
@@ -34,10 +35,10 @@ exports.auth = async (req, res, next) => {
 };
 
 function validate(req) {
-  const schema = {
+  const schema = Joi.object({
     email: Joi.string().min(5).max(255).required().email(),
     password: Joi.string().min(5).max(255).required(),
-  };
+  });
 
-  return Joi.validate(req, schema);
+  return schema.validate(req);
 }
