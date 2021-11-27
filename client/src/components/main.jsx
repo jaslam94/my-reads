@@ -4,7 +4,6 @@ import apiService from "../services/openLibService";
 
 import BookCard from "./bookCard";
 import SearchBox from "./searchBox";
-import NavBar from "./navbar";
 
 function Main() {
   const [books, setBooks] = useState([]);
@@ -30,7 +29,6 @@ function Main() {
   return (
     <>
       <div className="container mx-auto">
-        <NavBar />
         <SearchBox setSearchQuery={(text) => setSearchQuery(text)} />
         {isLoading === false && books.length === 0 && (
           <h1 className="text-5xl text-center mx-auto mt-32">

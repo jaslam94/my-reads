@@ -1,18 +1,17 @@
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Logout from "./logout";
 
 const navigation = [
-  { name: "Reads", href: "/books/read", current: true },
-  { name: "Want to Read", href: "/books/toread", current: false },
+  { name: "Reads", href: "/books/my/1", current: true },
+  { name: "Want to Read", href: "/books/my/2", current: false },
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function NavBar() {
+export default function NavBar({ user }) {
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (

@@ -2,14 +2,8 @@ import React from "react";
 import CardButtons from "./cardButtons";
 
 function BookCard({ book }) {
-  const {
-    key,
-    title,
-    author_name,
-    first_publish_year,
-    subject,
-    cover_edition_key,
-  } = book;
+  const { title, author_name, first_publish_year, subject, cover_edition_key } =
+    book;
 
   const imgSrc = cover_edition_key
     ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg`

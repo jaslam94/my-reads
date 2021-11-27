@@ -16,7 +16,6 @@ exports.getBooks = async (req, res, next) => {
       data: book,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       error: "Server error!",
@@ -28,7 +27,7 @@ exports.getReadsByType = async (req, res, next) => {
   try {
     const { type } = req.params;
 
-    const books = await Book.find((m) => m.type === type);
+    const books = await Book.where("type").eq(type);
 
     if (!books) {
       return res.status(404).json({
@@ -42,6 +41,7 @@ exports.getReadsByType = async (req, res, next) => {
       data: books,
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       success: false,
       error: "Server error!",

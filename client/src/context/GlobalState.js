@@ -1,6 +1,7 @@
 import React, { createContext, useReducer } from "react";
+import httpService from "../services/httpService";
 import AppReducer from "./AppReducer";
-import { httpService } from "../services/httpService";
+import { apiUrl } from "../config.json";
 
 const initialState = {
   books: [],
@@ -18,7 +19,9 @@ export const GlobalProvider = ({ children }) => {
   //Actions
   async function getBooks(type) {
     try {
-      const response = await httpService.get(`/api/v1/books?type=${type}`);
+      const response = await httpService.get(`${apiUrl}/books/my/${type}`);
+
+      console.log(response.data.data);
 
       const { data } = response.data;
 
@@ -44,7 +47,7 @@ export const GlobalProvider = ({ children }) => {
         },
       };
 
-      const response = await httpService.post("/api/v1/books", book, config);
+      const response = await httpService.post(`${apiUrl}/books`, book, config);
 
       const { data } = response.data;
 
@@ -64,7 +67,7 @@ export const GlobalProvider = ({ children }) => {
 
   async function deleteBook(id) {
     try {
-      await httpService.delete(`/api/v1/books/${id}`);
+      await httpService.delete(`${apiUrl}/books/${id}`);
 
       dispatch({
         type: "Del_Book",
@@ -83,8 +86,7 @@ export const GlobalProvider = ({ children }) => {
   return (
     <GlobalContext.Provider
       value={{
-        wantToRead: state.wantToRead,
-        read: state.read,
+        books: state.books,
         loading: state.loading,
         error: state.error,
         getBooks,
