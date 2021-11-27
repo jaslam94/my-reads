@@ -21,8 +21,6 @@ export const GlobalProvider = ({ children }) => {
     try {
       const response = await httpService.get(`${apiUrl}/books/my/${type}`);
 
-      console.log(response.data.data);
-
       const { data } = response.data;
 
       dispatch({
