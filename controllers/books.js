@@ -51,17 +51,6 @@ exports.getReadsByType = async (req, res, next) => {
 
 exports.addBook = async (req, res, next) => {
   try {
-    const {
-      title,
-      authors,
-      subjects,
-      firstPublished,
-      coverUrl,
-      type,
-      createdAt,
-      user,
-    } = req.body;
-
     const book = await Book.create(req.body);
     return res.status(201).json({
       success: true,

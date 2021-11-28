@@ -41,11 +41,15 @@ export default function ReadsList() {
       <div className="flex flex-col items-center justify-center">
         <div>
           <h1 className="inline-block text-3xl font-extrabold text-purple-700 tracking-tight mt-5">
-            {type === 1 ? "I have read..." : "I want to read..."}
+            {type === "1" ? "I have read..." : "I want to read..."}
           </h1>
         </div>
         <SearchBox setSearchQuery={(text) => setSearchQuery(text)} />
       </div>
+
+      {isLoading === true && (
+        <h1 className="text-3xl text-center mx-auto mt-16">Loading...</h1>
+      )}
 
       {isLoading === null && (
         <ul className="divide-y divide-gray-100">
@@ -58,10 +62,6 @@ export default function ReadsList() {
         <h1 className="text-2xl text-center mx-auto mt-16">
           No books found in the list...
         </h1>
-      )}
-
-      {isLoading === true && (
-        <h1 className="text-3xl text-center mx-auto mt-16">Loading...</h1>
       )}
     </div>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CardButtons() {
+export default function CardButtons({ handleRead, handleWantToRead }) {
   return (
     <div className="flex justify-end pb-5 pr-5">
       <div className="has-tooltip">
@@ -11,6 +11,7 @@ export default function CardButtons() {
           className="flex-none flex items-center justify-center w-9 h-9 rounded-md text-gray-400 border border-gray-300 mr-2"
           type="button"
           aria-label="like"
+          onClick={handleRead}
         >
           <svg width="20" height="20" fill="currentColor">
             <path
@@ -28,6 +29,7 @@ export default function CardButtons() {
         <button
           className="flex-none flex items-center justify-center w-9 h-9 rounded-md text-gray-400 border border-gray-300"
           type="button"
+          onClick={handleWantToRead}
           aria-label="like"
         >
           <svg width="12" height="20" fill="currentColor">

@@ -18,11 +18,11 @@ export default function ListItem({ book }) {
             <dd>{authors}</dd>
           </div>
           <div className="flex-none w-full mt-0.5 font-normal">
-            <dt className="inline">Year: </dt>{" "}
+            <dt className="inline font-bold">Year: </dt>
             <dd className="inline text-black">{firstPublished}</dd>
           </div>
           <div className="flex-none w-full mt-0.5 font-normal">
-            <dt className="inline">Subject: </dt>{" "}
+            <dt className="inline font-bold">Subject: </dt>
             <dd className="inline text-black">{subjects}</dd>
           </div>
         </dl>
