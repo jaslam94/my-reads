@@ -17,14 +17,21 @@ function BookCard({ book }) {
     ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg`
     : "https://openlibrary.org/images/icons/avatar_book-lg.png";
 
-  const { books, addBook } = useContext(GlobalContext);
+  const { books, addBook, deleteBook } = useContext(GlobalContext);
 
   const [saved, setSaved] = useState(null);
 
   const handleAddToList = (type) => {
     const readBook = createBook(type);
-    addBook(readBook);
-    setSaved(type);
+
+    const book = books.find((m) => m.key === readBook.key);
+    if (book) {
+      deleteBook(book._id);
+      setSaved(null);
+    } else {
+      addBook(readBook);
+      setSaved(type);
+    }
   };
 
   function createBook(type) {
