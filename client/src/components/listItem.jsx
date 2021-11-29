@@ -2,7 +2,7 @@ export default function ListItem({ book }) {
   const { title, authors, firstPublished, subjects, coverUrl, type } = book;
 
   return (
-    <article className="p-4 flex space-x-4">
+    <div className="p-4 flex space-x-4 ml-10">
       <img
         src={coverUrl}
         alt=""
@@ -10,9 +10,9 @@ export default function ListItem({ book }) {
         width="144"
         height="144"
       />
-      <div className="min-w-0 relative flex-auto sm:pr-20 lg:pr-0 xl:pr-20">
+      <div className="min-w-0 relative flex-auto">
         <h2 className="text-lg font-semibold text-black mb-0.5">{title}</h2>
-        <dl className="flex flex-wrap text-sm font-medium whitespace-pre">
+        <dl className="flex flex-wrap text-sm font-medium">
           <div>
             <dt className="sr-only">Authors</dt>
             <dd>{authors}</dd>
@@ -23,10 +23,10 @@ export default function ListItem({ book }) {
           </div>
           <div className="flex-none w-full mt-0.5 font-normal">
             <dt className="inline font-bold">Subject: </dt>
-            <dd className="inline text-black">{subjects}</dd>
+            <dd className="inline text-black break-words">{subjects}</dd>
           </div>
         </dl>
       </div>
-    </article>
+    </div>
   );
 }

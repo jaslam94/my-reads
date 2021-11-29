@@ -47,7 +47,7 @@ export default function ReadsList() {
         <SearchBox setSearchQuery={(text) => setSearchQuery(text)} />
       </div>
 
-      {isLoading === true && (
+      {/* {isLoading === true && (
         <h1 className="text-3xl text-center mx-auto mt-16">Loading...</h1>
       )}
 
@@ -62,7 +62,11 @@ export default function ReadsList() {
         <h1 className="text-2xl text-center mx-auto mt-16">
           No books found in the list...
         </h1>
-      )}
+      )} */}
+
+      <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+        {reads && reads.map((book) => <ListItem key={book._id} book={book} />)}
+      </div>
     </div>
   );
 }
