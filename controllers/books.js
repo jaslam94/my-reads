@@ -42,7 +42,7 @@ exports.getMyBooks = async (req, res, next) => {
     }
 
     const { user } = req;
-    console.log(user);
+
     const book = await Book.where("user.email").eq(user.email);
 
     if (!book) {
@@ -57,7 +57,6 @@ exports.getMyBooks = async (req, res, next) => {
       data: book,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       error: "Server error!",
@@ -83,7 +82,6 @@ exports.getReadsByType = async (req, res, next) => {
       data: books,
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       error: "Server error!",
@@ -93,10 +91,26 @@ exports.getReadsByType = async (req, res, next) => {
 
 exports.addBook = async (req, res, next) => {
   try {
-    const book = await Book.create(req.body);
+    if (!req.body) {
+      return res.status(400).json({
+        success: false,
+        message: "The request does not contain data!",
+      });
+    }
+
+    const bookToAdd = req.body;
+
+    const book = await Book.findOne({ key: bookToAdd.key });
+    if (book) {
+      return res.status(400).json({
+        success: false,
+        message: "Book already exists!",
+      });
+    }
+    const newBook = await Book.create(bookToAdd);
     return res.status(201).json({
       success: true,
-      data: book,
+      data: newBook,
     });
   } catch (err) {
     if (err.name === "ValidationError") {
