@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function CardButtons({ handleRead, handleWantToRead }) {
+export default function CardButtons({ handleAddToList, saved }) {
   return (
     <div className="flex justify-end pb-5 pr-5">
       <div className="has-tooltip">
@@ -8,10 +8,12 @@ export default function CardButtons({ handleRead, handleWantToRead }) {
           Already read or reading...
         </span>
         <button
-          className="flex-none flex items-center justify-center w-9 h-9 rounded-md text-gray-400 border border-gray-300 mr-2"
+          className={`flex-none flex items-center justify-center w-9 h-9 rounded-md text-gray-400 border border-gray-300 mr-2 hover:text-red-600 ${
+            saved === 1 && "text-red-600"
+          }`}
           type="button"
           aria-label="like"
-          onClick={handleRead}
+          onClick={() => handleAddToList(1)}
         >
           <svg width="20" height="20" fill="currentColor">
             <path
@@ -27,9 +29,11 @@ export default function CardButtons({ handleRead, handleWantToRead }) {
           Want to read...
         </span>
         <button
-          className="flex-none flex items-center justify-center w-9 h-9 rounded-md text-gray-400 border border-gray-300"
+          className={`flex-none flex items-center justify-center w-9 h-9 rounded-md text-gray-400 border border-gray-300 hover:text-blue-600 ${
+            saved === 2 && "text-blue-600"
+          }`}
           type="button"
-          onClick={handleWantToRead}
+          onClick={() => handleAddToList(2)}
           aria-label="like"
         >
           <svg width="12" height="20" fill="currentColor">

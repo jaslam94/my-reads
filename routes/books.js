@@ -1,14 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const {
-  getBooks,
+  getBookById,
   getReadsByType,
+  getMyBooks,
   addBook,
   delBook,
 } = require("../controllers/books");
 
 router.route("/").post(addBook);
-router.route("/:id").get(getBooks).delete(delBook);
+router.route("/my").get(getMyBooks);
+router.route("/:id").get(getBookById).delete(delBook);
 router.route("/my/:type").get(getReadsByType);
 
 module.exports = router;

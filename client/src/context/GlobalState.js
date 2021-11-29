@@ -17,6 +17,27 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   //Actions
+  async function getMyBooks() {
+    try {
+      httpService.setJwt();
+      const response = await httpService.get(`${apiUrl}/books/my`);
+
+      const { data } = response.data;
+
+      dispatch({
+        type: "Get_Books",
+        payload: data,
+      });
+    } catch (err) {
+      const { error } = err.response.data;
+
+      dispatch({
+        type: "API_ERROR",
+        payload: error,
+      });
+    }
+  }
+
   async function getBooks(type) {
     try {
       const response = await httpService.get(`${apiUrl}/books/my/${type}`);
@@ -87,6 +108,7 @@ export const GlobalProvider = ({ children }) => {
         books: state.books,
         loading: state.loading,
         error: state.error,
+        getMyBooks,
         getBooks,
         addBook,
         deleteBook,
