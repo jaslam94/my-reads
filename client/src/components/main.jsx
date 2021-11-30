@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { GlobalContext } from "./../context/GlobalState";
+import React, { useEffect, useState } from "react";
 import apiService from "../services/openLibService";
 import BookCard from "./bookCard";
 import SearchBox from "./searchBox";
@@ -9,12 +8,7 @@ function Main() {
   const [isLoading, setIsLoading] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  const { getMyBooks } = useContext(GlobalContext);
-
   useEffect(() => {
-    //update global state with my books
-    getMyBooks();
-
     if (searchQuery !== "") {
       fetchData();
     } else {

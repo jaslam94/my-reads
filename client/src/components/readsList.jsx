@@ -5,20 +5,22 @@ import { useParams } from "react-router-dom";
 import SearchBox from "./searchBox";
 
 export default function ReadsList() {
-  const { books, getBooks } = useContext(GlobalContext);
+  const { books, getMyBooks } = useContext(GlobalContext);
 
   const [reads, setReads] = useState(books);
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
   const { type } = useParams();
+  const bookType = parseInt(type);
 
   function filterBooks() {
     const filtered = books.filter(
       (m) =>
-        m.title.includes(searchQuery) ||
-        m.authors.includes(searchQuery) ||
-        m.subjects.includes(searchQuery)
+        m.type === bookType &&
+        (m.title.toLowerCase().includes(searchQuery) ||
+          m.authors.toLowerCase().includes(searchQuery) ||
+          m.subjects.toLowerCase().includes(searchQuery))
     );
     setReads(filtered);
   }
@@ -27,14 +29,20 @@ export default function ReadsList() {
     if (searchQuery !== "") {
       //filter books
       filterBooks();
+      setIsLoading(false);
     } else {
       //get from context
-      getBooks(type);
-      //set reads
-      setReads(books);
-      setIsLoading(null);
+      getMyBooks();
     }
   }, [searchQuery]);
+
+  useEffect(() => {
+    //books are updated
+    const reads = books.filter((m) => m.type === bookType);
+    //set reads
+    setReads(reads);
+    setIsLoading(false);
+  }, [books]);
 
   return (
     <div className="container mx-auto">
@@ -47,26 +55,22 @@ export default function ReadsList() {
         <SearchBox setSearchQuery={(text) => setSearchQuery(text)} />
       </div>
 
-      {/* {isLoading === true && (
+      {isLoading === true && (
         <h1 className="text-3xl text-center mx-auto mt-16">Loading...</h1>
-      )}
-
-      {isLoading === null && (
-        <ul className="divide-y divide-gray-100">
-          {reads &&
-            reads.map((book) => <ListItem key={book._id} book={book} />)}
-        </ul>
       )}
 
       {isLoading === false && reads.length === 0 && (
         <h1 className="text-2xl text-center mx-auto mt-16">
           No books found in the list...
         </h1>
-      )} */}
+      )}
 
-      <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-        {reads && reads.map((book) => <ListItem key={book._id} book={book} />)}
-      </div>
+      {isLoading === false && (
+        <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+          {reads &&
+            reads.map((book) => <ListItem key={book._id} book={book} />)}
+        </div>
+      )}
     </div>
   );
 }

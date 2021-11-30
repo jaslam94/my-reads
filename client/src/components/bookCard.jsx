@@ -18,7 +18,7 @@ function BookCard({ book }) {
     ? `https://covers.openlibrary.org/b/olid/${book.cover_edition_key}-M.jpg`
     : "https://openlibrary.org/images/icons/avatar_book-lg.png";
 
-  const { books, addBook, deleteBook } = useContext(GlobalContext);
+  const { books, getMyBooks, addBook, deleteBook } = useContext(GlobalContext);
 
   const [saved, setSaved] = useState(null);
 
@@ -57,6 +57,11 @@ function BookCard({ book }) {
   }
 
   useEffect(() => {
+    //get up to date global state
+    getMyBooks();
+  }, []);
+
+  useEffect(() => {
     //check if book is already in global state
     const book = books.find((m) => m.key === key);
 
@@ -64,7 +69,7 @@ function BookCard({ book }) {
       if (book.type === 1) setSaved(1);
       else setSaved(2);
     }
-  }, []);
+  }, [books]);
 
   return (
     book && (
