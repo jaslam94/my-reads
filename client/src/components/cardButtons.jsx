@@ -8,7 +8,7 @@ export default function CardButtons({ handleAddToList, saved }) {
           Already read or reading...
         </span>
         <button
-          className={`flex-none flex items-center justify-center w-9 h-9 rounded-md text-gray-400 border border-gray-300 mr-2 hover:text-red-600 ${
+          className={`flex-none flex items-center justify-center w-9 h-9 rounded-md active:bg-gray-300 hover:bg-gray-100 text-gray-400 border border-gray-300 mr-2 hover:text-red-600 ${
             saved === 1 && "text-red-600"
           }`}
           type="button"
@@ -29,7 +29,7 @@ export default function CardButtons({ handleAddToList, saved }) {
           Want to read...
         </span>
         <button
-          className={`flex-none flex items-center justify-center w-9 h-9 rounded-md text-gray-400 border border-gray-300 hover:text-blue-600 ${
+          className={`flex-none flex items-center justify-center w-9 h-9 rounded-md active:bg-gray-300 hover:bg-gray-100 text-gray-400 border border-gray-300 hover:text-blue-600 ${
             saved === 2 && "text-blue-600"
           }`}
           type="button"

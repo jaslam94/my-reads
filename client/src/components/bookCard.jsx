@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import CardButtons from "./cardButtons";
 import { GlobalContext } from "./../context/GlobalState";
 import authService from "../services/authService";
+import { toast } from "react-toastify";
 
 function BookCard({ book }) {
   const {
@@ -28,9 +29,11 @@ function BookCard({ book }) {
     if (book) {
       deleteBook(book._id);
       setSaved(null);
+      toast.warning("Removed from the list.");
     } else {
       addBook(readBook);
       setSaved(type);
+      toast.success("Added to the list.");
     }
   };
 

@@ -14,12 +14,12 @@ function SearchBox({ setSearchQuery }) {
         <div className="flex items-center border-b-2 border-teal-500 py-2">
           <input
             onChange={(e) => setText(e.target.value)}
-            className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+            className="appearance-none bg-transparent border-none w-full text-gray-600 mr-3 py-1 px-2 leading-tight focus:outline-none"
             type="text"
             placeholder="Search book by title..."
           />
           <button
-            className="flex-shrink-0 bg-gray-700 hover:bg-gray-900 border-gray-700 hover:border-black text-sm border-4 text-white py-1 px-2 rounded"
+            className="flex-shrink-0 bg-gray-700 hover:bg-gray-800 active:bg-black border-gray-700 hover:border-gray-800 text-sm border-4 text-white py-1 px-2 rounded"
             type="submit"
           >
             Search
