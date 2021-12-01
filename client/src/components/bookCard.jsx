@@ -22,19 +22,30 @@ function BookCard({ book }) {
 
   const [saved, setSaved] = useState(null);
 
-  const handleAddToList = (type) => {
+  const handleAddToList = async (type) => {
     const readBook = createBook(type);
 
     const book = books.find((m) => m.key === readBook.key);
     if (book) {
-      deleteBook(book._id);
-      setSaved(null);
-      toast.warning("Removed from the list.");
-    } else {
-      addBook(readBook);
-      setSaved(type);
-      toast.success("Added to the list.");
+      await deleteBook(book._id);
+
+      if (book.type === type) {
+        setSaved(null);
+        toast.warning(
+          `Removed ${readBook.title} from the ${
+            type === 1 ? "reads" : "want to read"
+          } list.`
+        );
+        return;
+      }
     }
+    await addBook(readBook);
+    setSaved(type);
+    toast.success(
+      `Added ${readBook.title} to the ${
+        type === 1 ? "reads" : "want to read"
+      } list.`
+    );
   };
 
   function createBook(type) {

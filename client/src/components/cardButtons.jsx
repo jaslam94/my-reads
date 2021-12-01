@@ -5,7 +5,9 @@ export default function CardButtons({ handleAddToList, saved }) {
     <div className="flex justify-end pb-5 pr-5">
       <div className="has-tooltip">
         <span className="tooltip inline-block bg-gray-700 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg -mt-8">
-          Already read or reading...
+          {saved === 1
+            ? "Remove from my reads list..."
+            : "Add to my reads list..."}
         </span>
         <button
           className={`flex-none flex items-center justify-center w-9 h-9 rounded-md active:bg-gray-300 hover:bg-gray-100 text-gray-400 border border-gray-300 mr-2 hover:text-red-600 ${
@@ -26,7 +28,9 @@ export default function CardButtons({ handleAddToList, saved }) {
       </div>
       <div className="has-tooltip">
         <span className="tooltip inline-block bg-gray-700 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg -mt-8">
-          Want to read...
+          {saved === 2
+            ? "Remove from my want to read list..."
+            : "Add to my want to read list..."}
         </span>
         <button
           className={`flex-none flex items-center justify-center w-9 h-9 rounded-md active:bg-gray-300 hover:bg-gray-100 text-gray-400 border border-gray-300 hover:text-blue-600 ${
