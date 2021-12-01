@@ -2,7 +2,7 @@ export default function ListItem({ book }) {
   const { title, authors, firstPublished, subjects, coverUrl, type } = book;
 
   return (
-    <div className="p-4 flex space-x-4 ml-10">
+    <div className="p-4 flex space-x-4 ml-5">
       <img
         src={coverUrl}
         alt=""

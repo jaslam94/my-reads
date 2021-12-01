@@ -66,7 +66,7 @@ export default function ReadsList() {
       )}
 
       {isLoading === false && (
-        <div class="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+        <div className="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
           {reads &&
             reads.map((book) => <ListItem key={book._id} book={book} />)}
         </div>
