@@ -3,10 +3,14 @@ export default function ListItem({ book, handleDeleteItem }) {
 
   return (
     <div className="p-4 flex space-x-4 ml-10">
-      <div className="relative group flex-none w-1/3 h-1/3">
-        <img src={coverUrl} alt="cover" className="rounded-lg object-cover" />
+      <div className="relative group flex-none">
+        <img
+          src={coverUrl}
+          alt="cover"
+          className="rounded-lg object-contain h-48 w-full"
+        />
         <div className="has-tooltip">
-          <span className="tooltip inline-block bg-gray-700 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg -mt-64">
+          <span className="tooltip inline-block bg-gray-700 font-medium shadow-sm text-white py-2 px-3 text-sm rounded-lg -mt-60">
             Remove
           </span>
           <button
