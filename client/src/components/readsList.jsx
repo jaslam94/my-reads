@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import SearchBox from "./searchBox";
 
 export default function ReadsList() {
-  const { books, getMyBooks } = useContext(GlobalContext);
+  const { books, getMyBooks, deleteBook } = useContext(GlobalContext);
 
   const [reads, setReads] = useState(books);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +24,10 @@ export default function ReadsList() {
     );
     setReads(filtered);
   }
+
+  const handleDeleteItem = async (id) => {
+    await deleteBook(id);
+  };
 
   useEffect(() => {
     if (searchQuery !== "") {
@@ -68,7 +72,13 @@ export default function ReadsList() {
       {isLoading === false && (
         <div className="grid xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-5">
           {reads &&
-            reads.map((book) => <ListItem key={book._id} book={book} />)}
+            reads.map((book) => (
+              <ListItem
+                key={book._id}
+                book={book}
+                handleDeleteItem={handleDeleteItem}
+              />
+            ))}
         </div>
       )}
     </div>
