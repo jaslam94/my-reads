@@ -79,7 +79,7 @@ function BookCard({ book }) {
     if (book) {
       if (book.type === 1) setSaved(1);
       else setSaved(2);
-    }
+    } else setSaved(null);
   }, [books]);
 
   return (
