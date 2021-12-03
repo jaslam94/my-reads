@@ -1,9 +1,10 @@
 import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Logout from "./logout";
+import logo from "../assets/logo/logo.png";
 
 const navigation = [
-  { name: "Reads", href: "/books/my/1", current: true },
+  { name: "Reads", href: "/books/my/1", current: false },
   { name: "Want to Read", href: "/books/my/2", current: false },
 ];
 
@@ -34,12 +35,12 @@ export default function NavBar({ user }) {
                   <a href="/">
                     <img
                       className="block lg:hidden h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                      src={logo}
                       alt="Workflow"
                     />
                     <img
                       className="hidden lg:block h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
+                      src={logo}
                       alt="Workflow"
                     />
                   </a>
