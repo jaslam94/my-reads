@@ -2,6 +2,7 @@ import { Disclosure } from "@headlessui/react";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Logout from "./logout";
 import logo from "../assets/logo/logo.png";
+import logo_sm from "../assets/logo/logo_sm.png";
 
 const navigation = [
   { name: "Reads", href: "/books/my/1", current: false },
@@ -35,7 +36,7 @@ export default function NavBar({ user }) {
                   <a href="/">
                     <img
                       className="block lg:hidden h-8 w-auto"
-                      src={logo}
+                      src={logo_sm}
                       alt="Workflow"
                     />
                     <img
