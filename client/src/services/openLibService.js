@@ -5,7 +5,7 @@ async function getBooksByName(searchQuery) {
 
   try {
     const { data } = await httpService.get(
-      `http://openlibrary.org/search.json?title=${searchQuery}&fields=key,title,first_publish_year,author_name,subject,cover_edition_key&limit=6`
+      `https://openlibrary.org/search.json?title=${searchQuery}&fields=key,title,first_publish_year,author_name,subject,cover_edition_key&limit=6`
     );
     return data;
   } catch (err) {
