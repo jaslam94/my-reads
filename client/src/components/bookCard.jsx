@@ -84,7 +84,7 @@ function BookCard({ book }) {
 
   return (
     book && (
-      <div className="max-w-sm rounded shadow-lg overflow-hidden py-5">
+      <div className="rounded shadow-lg overflow-hidden py-5">
         <CardButtons handleAddToList={handleAddToList} saved={saved} />
 
         <div>

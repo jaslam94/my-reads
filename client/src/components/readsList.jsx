@@ -49,13 +49,11 @@ export default function ReadsList() {
   }, [books]);
 
   return (
-    <div className="container mx-auto">
+    <div className="flex-grow py-16">
       <div className="flex flex-col items-center justify-center">
-        <div>
-          <h1 className="inline-block text-3xl font-extrabold text-purple-700 tracking-tight mt-5">
-            {type === "1" ? "I have read..." : "I want to read..."}
-          </h1>
-        </div>
+        <h1 className="inline-block text-3xl font-extrabold text-purple-700 tracking-tight mb-12">
+          {type === "1" ? "I have read..." : "I want to read..."}
+        </h1>
         <SearchBox setSearchQuery={(text) => setSearchQuery(text)} />
       </div>
 

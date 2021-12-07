@@ -98,16 +98,37 @@ exports.addBook = async (req, res, next) => {
       });
     }
 
+    const token = req.header("x-auth-token");
+    if (!token)
+      return res.status(401).json({
+        success: false,
+        message: "Access denied. No token provided.",
+      });
+
+    try {
+      const decoded = jwt.verify(token, TOKEN_KEY);
+      req.user = decoded;
+    } catch (ex) {
+      res.status(400).send({ success: false, message: "Invalid token." });
+    }
+
+    const { user } = req;
+
     const bookToAdd = req.body;
 
-    const book = await Book.findOne({ key: bookToAdd.key });
+    const book = await Book.findOne({
+      $and: [{ key: bookToAdd.key }, { "user.email": user.email }],
+    });
+
     if (book) {
       return res.status(400).json({
         success: false,
         message: "Book already exists!",
       });
     }
+
     const newBook = await Book.create(bookToAdd);
+
     return res.status(201).json({
       success: true,
       data: newBook,
@@ -133,7 +154,25 @@ exports.delBook = async (req, res, next) => {
   try {
     const { id } = req.params;
 
-    const book = await Book.findById(id);
+    const token = req.header("x-auth-token");
+    if (!token)
+      return res.status(401).json({
+        success: false,
+        message: "Access denied. No token provided.",
+      });
+
+    try {
+      const decoded = jwt.verify(token, TOKEN_KEY);
+      req.user = decoded;
+    } catch (ex) {
+      res.status(400).send({ success: false, message: "Invalid token." });
+    }
+
+    const { user } = req;
+
+    const book = await Book.findOne({
+      $and: [{ _id: id }, { "user.email": user.email }],
+    });
 
     if (!book) {
       return res.status(404).json({
