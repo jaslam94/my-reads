@@ -14,6 +14,7 @@ import NavBar from "./components/navbar";
 import authService from "./services/authService";
 import ReadsList from "./components/readsList";
 import { GlobalProvider } from "./context/GlobalState";
+import { Footer } from "./components/footer";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -36,31 +37,32 @@ function App() {
         draggable
         pauseOnHover
       />
-
-      {user && <NavBar user={user} />}
-
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Main />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/books/my/:type"
-            element={
-              <ProtectedRoute>
-                <ReadsList />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </BrowserRouter>
+      <div className="flex flex-col h-screen">
+        {user && <NavBar user={user} />}
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute>
+                  <Main />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/books/my/:type"
+              element={
+                <ProtectedRoute>
+                  <ReadsList />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </BrowserRouter>
+        <Footer />
+      </div>
     </GlobalProvider>
   );
 }
