@@ -15,8 +15,12 @@ export async function login(email, password) {
   localStorage.setItem(tokenKey, token);
 }
 
-export async function loginWithJwt(jwt) {
-  localStorage.setItem(tokenKey, jwt);
+export async function loginWithGoogle(jwt) {
+  const response = await http.post(`${apiUrl}/auth/login_g`, {
+    token: jwt,
+  });
+  const { token } = response.data;
+  localStorage.setItem(tokenKey, token);
 }
 
 export async function logout() {
@@ -35,7 +39,7 @@ export function getCurrentUser() {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   login,
-  loginWithJwt,
+  loginWithGoogle,
   logout,
   getCurrentUser,
 };

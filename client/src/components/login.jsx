@@ -21,22 +21,21 @@ export default function Login() {
     }
   }
 
-  const HandleGoogleSignIn = () => {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const { user } = result;
-        authService.loginWithJwt(user.accessToken);
-        window.location = "/";
-      })
-      .catch((error) => {
-        setError("Cannot login. Try again!");
-      });
+  const HandleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const { oauthIdToken } = result._tokenResponse;
+      await authService.loginWithGoogle(oauthIdToken);
+      window.location = "/";
+    } catch (error) {
+      setError("Cannot login. Try again!");
+    }
   };
 
   if (authService.getCurrentUser()) return <Navigate to="/" />;
 
   return (
-    <div className="flex items-center justify-center my-6">
+    <div className="flex items-center justify-center my-auto">
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded">
         <div>
           <img className="mx-auto h-12 w-auto" src={logo} alt="Workflow" />
