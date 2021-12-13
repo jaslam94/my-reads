@@ -40,7 +40,6 @@ exports.addUser = async (req, res, next) => {
       data: user,
     });
   } catch (err) {
-    console.log(err);
     if (err.name === "ValidationError") {
       const messages = Object.values(err.errors).map((m) => m.message);
 

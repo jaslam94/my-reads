@@ -17,7 +17,7 @@ export async function getUserById(id) {
 export async function addUser(user) {
   try {
     const { fullName, email, password, confirmPassword } = user;
-    const response = await http.post(
+    await http.post(
       apiUrl + "/users/add",
       {
         fullName,

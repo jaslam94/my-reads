@@ -37,7 +37,7 @@ function App() {
         draggable
         pauseOnHover
       />
-      <div className="flex flex-col h-screen">
+      <div className="flex flex-col justify-between h-screen">
         {user && <NavBar user={user} />}
         <BrowserRouter>
           <Routes>
