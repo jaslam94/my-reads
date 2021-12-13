@@ -56,3 +56,34 @@ exports.addUser = async (req, res, next) => {
     });
   }
 };
+
+exports.addGoogleUser = async (req, res, next) => {
+  try {
+    let { fullName: name, email } = req.body;
+
+    const user = await User.create({
+      name,
+      email,
+      signInProvider: "google.com",
+    });
+
+    return res.status(201).json({
+      success: true,
+      data: user,
+    });
+  } catch (err) {
+    if (err.name === "ValidationError") {
+      const messages = Object.values(err.errors).map((m) => m.message);
+
+      return res.status(400).json({
+        success: false,
+        error: messages,
+      });
+    }
+
+    return res.status(500).json({
+      success: false,
+      error: "Server error!",
+    });
+  }
+};
