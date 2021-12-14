@@ -14,6 +14,9 @@ module.exports = function (req, res, next) {
     req.user = decoded;
     next();
   } catch (ex) {
-    res.status(400).send("Invalid token.");
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong while processing the token.",
+    });
   }
 };
